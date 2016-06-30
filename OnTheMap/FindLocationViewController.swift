@@ -14,8 +14,27 @@ class FindLocationViewController: UIViewController{
     
     @IBOutlet weak var findLocationView: UITextField!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var findOnMapContainer: UIView!
+    @IBOutlet weak var addLinkContainer: UIView!
     
     var coordinate: CLLocationCoordinate2D!
+    
+    @IBAction func cancelAction(sender: AnyObject) {
+        if(findOnMapContainer.hidden){
+            print("show map");
+            findOnMapContainer.hidden = false;
+            addLinkContainer.hidden = true;
+        }else{
+            print("hide map");
+            findOnMapContainer.hidden = true;
+            addLinkContainer.hidden = false;
+        }
+    }
+    
+    override func viewDidLoad() {
+        findOnMapContainer.hidden = true;
+        addLinkContainer.hidden = true;
+    }
     
     @IBAction func findLocation(sender: AnyObject) {
         findLocationView.endEditing(true)
