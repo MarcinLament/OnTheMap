@@ -34,6 +34,10 @@ class FindLocationViewController: UIViewController{
     override func viewDidLoad() {
         findOnMapContainer.hidden = true;
         addLinkContainer.hidden = true;
+        
+        let navigationBar = self.navigationController?.navigationBar
+        navigationBar?.setBackgroundImage(UIImage(), forBarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
+        navigationBar?.shadowImage = UIImage()
     }
     
     @IBAction func findLocation(sender: AnyObject) {
