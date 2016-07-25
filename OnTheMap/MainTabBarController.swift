@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 class MainTabBarController: UITabBarController{
-    
-    
-    
+
     override func viewDidLoad() {
         loadData()
     }
@@ -24,11 +22,8 @@ class MainTabBarController: UITabBarController{
     }
     
     @IBAction func checkIn(sender: AnyObject) {
-//        UdacityClient.sharedInstance().getUserLocation(UdacityClient.sharedInstance().userId!)
         let controller = storyboard!.instantiateViewControllerWithIdentifier("CheckinNavigationController") as! UINavigationController
-        presentViewController(controller, animated: true){
-            print("OHOHOHOHOHOH")
-        }
+        presentViewController(controller, animated: true){}
     }
     
     @IBAction func refresh(sender: AnyObject) {
@@ -39,15 +34,11 @@ class MainTabBarController: UITabBarController{
         OTMClient.sharedInstance().getFirst100Checkins(){ (success, error) in
             performUIUpdatesOnMain {
                 if (success != nil) {
-                    print("Loaded!!!")
                     if(self.selectedIndex == 0){
                         (self.selectedViewController as! MapViewController).refresh()
                     }else{
                         (self.selectedViewController as! ListViewController).refresh()
                     }
-                } else {
-                    print("Loading error!!!")
-                    //                    self.displayError(errorString)
                 }
             }
         }

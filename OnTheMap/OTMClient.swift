@@ -39,7 +39,6 @@ class OTMClient : NSObject {
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
             func sendError(error: String) {
-                print(error)
                 let userInfo = [NSLocalizedDescriptionKey : error]
                 completionHandlerForPOST(result: nil, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
             }
@@ -61,7 +60,6 @@ class OTMClient : NSObject {
             
             if(subsetResponseData){
                 let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
-                print(NSString(data: newData, encoding: NSUTF8StringEncoding))
                 self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForPOST)
             }else{
                 self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForPOST)
@@ -75,10 +73,7 @@ class OTMClient : NSObject {
     private func convertDataWithCompletionHandler(data: NSData, completionHandlerForConvertData: (result: AnyObject!, error: NSError?) -> Void) {
         do {
             let parsedResult = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as! NSDictionary
-            print(parsedResult)
-            
             completionHandlerForConvertData(result: parsedResult, error: nil)
-            //
         } catch {
             let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
             completionHandlerForConvertData(result: nil, error: NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))

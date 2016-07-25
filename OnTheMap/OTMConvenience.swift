@@ -39,13 +39,11 @@ extension OTMClient{
         taskForPOSTMethod(UdacityConstants.SessionUrl, httpMethod: httpMethod, httpBody: httpBody, headers: headers, subsetResponseData: true) { (result, error) in
             
             if let error = error {
-                print(error)
                 completionHandlerForLogin(success: false, userId: nil, errorString: "Login Failed")
             } else {
                 if let userId = (result[ResponseKeys.Account] as! NSDictionary)[ResponseKeys.Key]{
                     completionHandlerForLogin(success: true, userId: userId as? String, errorString: nil)
                 } else {
-                    print("Could not get userId")
                     completionHandlerForLogin(success: false, userId: nil, errorString: "Login Failed")
                 }
             }
@@ -114,12 +112,9 @@ extension OTMClient{
         let jsonData = try! NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions.PrettyPrinted)
         let jsonString = NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
         
-        print(jsonString)
-        
         taskForPOSTMethod(ParseConstants.LocationsUrl, httpMethod: httpMethod, httpBody: jsonString, headers: headers, subsetResponseData: false) { (result, error) in
             
             if let error = error {
-                print(error)
                 completionHandlerForPostingUserLocation(userCheckin: nil, errorString: "Could not parse Posting User Location response")
             } else {
                 let userPost = UserPost.userPostFromResult((result as? [String:AnyObject])!)

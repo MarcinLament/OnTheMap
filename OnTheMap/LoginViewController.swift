@@ -7,9 +7,8 @@
 //
 
 import UIKit
-//import FBSDKAccessToken
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -18,6 +17,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         styleViews();
+        
+        emailAddress.delegate = self
+        password.delegate = self
+        if emailAddress.text!.isEmpty || password.text!.isEmpty{
+            loginButton.userInteractionEnabled = false
+        }
     }
     
     @IBAction func loginUser(sender: AnyObject) {
@@ -44,7 +49,15 @@ class LoginViewController: UIViewController {
         emailAddress.placeholder = "Email address"
         styleTextField(password)
         password.placeholder = "Password"
-        styleButton(loginButton)
+        
+        let colorTop = UIColor(red:0.13, green:0.65, blue:0.94, alpha:1.0).CGColor
+        let colorBottom = UIColor(red:0.19, green:0.56, blue:0.78, alpha:1.0).CGColor
+        styleButton(loginButton, colorTop: colorTop, colorBottom: colorBottom)
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        loginButton.userInteractionEnabled = !(emailAddress.text!.isEmpty || password.text!.isEmpty)
+        return true
     }
 }
 
@@ -62,22 +75,7 @@ extension LoginViewController {
     }
     
     private func displayError(errorString: String?) {
-        print("Failure: " + errorString!)
-    }
-    
-    private func styleButton(uiButton: UIButton){
-        uiButton.tintColor = UIColor.whiteColor()
-        
-        let colorTop = UIColor(red:0.13, green:0.65, blue:0.94, alpha:1.0).CGColor
-        let colorBottom = UIColor(red:0.19, green:0.56, blue:0.78, alpha:1.0).CGColor
-        
-        let backgroundGradient = CAGradientLayer()
-        backgroundGradient.frame.size = uiButton.frame.size
-        backgroundGradient.colors = [colorTop, colorBottom]
-        backgroundGradient.locations = [0.0, 1.0]
-        
-        backgroundGradient.cornerRadius = 3
-        uiButton.layer.insertSublayer(backgroundGradient, atIndex: 0)
+        showAlert("Error", message: errorString!, completion: nil)
     }
     
     private func styleTextField(textField: UITextField){

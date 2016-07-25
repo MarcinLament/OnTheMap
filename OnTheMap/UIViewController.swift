@@ -16,4 +16,16 @@ extension UIViewController{
         ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: completion))
         presentViewController(ac, animated: true, completion: nil)
     }
+    
+    public func styleButton(uiButton: UIButton, colorTop: CGColor, colorBottom: CGColor){
+        uiButton.tintColor = UIColor.whiteColor()
+        
+        let backgroundGradient = CAGradientLayer()
+        backgroundGradient.frame.size = uiButton.frame.size
+        backgroundGradient.colors = [colorTop, colorBottom]
+        backgroundGradient.locations = [0.0, 1.0]
+        
+        backgroundGradient.cornerRadius = 3
+        uiButton.layer.insertSublayer(backgroundGradient, atIndex: 0)
+    }
 }
