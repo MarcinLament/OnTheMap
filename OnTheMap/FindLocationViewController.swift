@@ -16,6 +16,7 @@ class FindLocationViewController: UIViewController{
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var findOnMapContainer: UIView!
     @IBOutlet weak var addLinkContainer: UIView!
+
     
     var coordinate: CLLocationCoordinate2D!
     
@@ -38,6 +39,9 @@ class FindLocationViewController: UIViewController{
         let navigationBar = self.navigationController?.navigationBar
         navigationBar?.setBackgroundImage(UIImage(), forBarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
         navigationBar?.shadowImage = UIImage()
+        
+//        styleButton(findOnMapButton)
+//        findOnMapButton.backgroundColor = UIColor(red:0.15, green:0.45, blue:0.85, alpha:1.0)
     }
     
     @IBAction func findLocation(sender: AnyObject) {
@@ -84,6 +88,8 @@ class FindLocationViewController: UIViewController{
         let region: MKCoordinateRegion = MKCoordinateRegionMake(coordinate, span)
         mapView.setRegion(region, animated: true)
     }
+    
+    
 }
 
 extension FindLocationViewController: MKMapViewDelegate{

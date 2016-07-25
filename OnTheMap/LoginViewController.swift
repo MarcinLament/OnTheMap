@@ -66,7 +66,6 @@ extension LoginViewController {
     }
     
     private func styleButton(uiButton: UIButton){
-//        uiButton.layer.backgroundColor = UIColor(red:0.98, green:0.72, blue:0.45, alpha:1.0).CGColor
         uiButton.tintColor = UIColor.whiteColor()
         
         let colorTop = UIColor(red:0.13, green:0.65, blue:0.94, alpha:1.0).CGColor

@@ -24,6 +24,7 @@
 		20D5148F1CDBAD9D000FB081 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D5148E1CDBAD9D000FB081 /* Assets.xcassets */; };
 		20D514921CDBAD9D000FB081 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D514901CDBAD9D000FB081 /* LaunchScreen.storyboard */; };
 		20D5149A1CDBC00A000FB081 /* UdacityClientOLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20D514991CDBC00A000FB081 /* UdacityClientOLD.swift */; };
+		F57F408E1D463FBD003236E6 /* FindOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F408D1D463FBD003236E6 /* FindOnMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		20D514911CDBAD9D000FB081 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20D514931CDBAD9D000FB081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20D514991CDBC00A000FB081 /* UdacityClientOLD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityClientOLD.swift; sourceTree = "<group>"; };
+		F57F408D1D463FBD003236E6 /* FindOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindOnMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				20D514891CDBAD9D000FB081 /* LoginViewController.swift */,
 				203E2AC71CE757D400D55FBC /* MapViewController.swift */,
 				203E2AC91CE757E600D55FBC /* ListViewController.swift */,
+				F57F408D1D463FBD003236E6 /* FindOnMapViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				20535F401D0302DC00002A85 /* OTMConvenience.swift in Sources */,
 				20D5149A1CDBC00A000FB081 /* UdacityClientOLD.swift in Sources */,
 				203E2ACC1CE75B2D00D55FBC /* UserCheckin.swift in Sources */,
+				F57F408E1D463FBD003236E6 /* FindOnMapViewController.swift in Sources */,
 				203E2ACE1CE7745500D55FBC /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
