@@ -23,6 +23,7 @@
 		20D5148D1CDBAD9D000FB081 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D5148B1CDBAD9D000FB081 /* Main.storyboard */; };
 		20D5148F1CDBAD9D000FB081 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20D5148E1CDBAD9D000FB081 /* Assets.xcassets */; };
 		20D514921CDBAD9D000FB081 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20D514901CDBAD9D000FB081 /* LaunchScreen.storyboard */; };
+		20F5D28B1D480B6800E69B02 /* UserCheckinsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20F5D28A1D480B6800E69B02 /* UserCheckinsStorage.swift */; };
 		F54F39A61D4672520081DB02 /* SubmitLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54F39A51D4672520081DB02 /* SubmitLinkViewController.swift */; };
 		F57F408E1D463FBD003236E6 /* FindOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57F408D1D463FBD003236E6 /* FindOnMapViewController.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		20D5148E1CDBAD9D000FB081 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		20D514911CDBAD9D000FB081 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20D514931CDBAD9D000FB081 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20F5D28A1D480B6800E69B02 /* UserCheckinsStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCheckinsStorage.swift; sourceTree = "<group>"; };
 		F54F39A51D4672520081DB02 /* SubmitLinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitLinkViewController.swift; sourceTree = "<group>"; };
 		F57F408D1D463FBD003236E6 /* FindOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindOnMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 		20D514861CDBAD9D000FB081 /* OnTheMap */ = {
 			isa = PBXGroup;
 			children = (
+				20F5D2891D480B4600E69B02 /* Storage */,
 				20535F3A1D02F7FD00002A85 /* Extensions */,
 				20535F391D02F76500002A85 /* Storyboards */,
 				20535F381D02F74400002A85 /* Models */,
@@ -141,6 +144,14 @@
 				20D514931CDBAD9D000FB081 /* Info.plist */,
 			);
 			path = OnTheMap;
+			sourceTree = "<group>";
+		};
+		20F5D2891D480B4600E69B02 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				20F5D28A1D480B6800E69B02 /* UserCheckinsStorage.swift */,
+			);
+			name = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20F5D28B1D480B6800E69B02 /* UserCheckinsStorage.swift in Sources */,
 				203E2AC61CE7549200D55FBC /* GCDBlackBox.swift in Sources */,
 				20D5148A1CDBAD9D000FB081 /* LoginViewController.swift in Sources */,
 				2016C8A71D1B20220060651D /* OTMConstants.swift in Sources */,

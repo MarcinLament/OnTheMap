@@ -14,10 +14,6 @@ class MapViewController: UIViewController{
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var userCheckins: [UserCheckin] {
-        return OTMClient.sharedInstance().userCheckins
-    }
-    
     override func viewWillAppear(animated: Bool) {
         updateMapLayout()
     }
@@ -28,7 +24,7 @@ class MapViewController: UIViewController{
     
     func updateMapLayout(){
         var annotations = [MKPointAnnotation]()
-        for checkin in userCheckins {
+        for checkin in UserCheckinsStorage.instance.userCheckins {
             let coordinate = CLLocationCoordinate2D(latitude: checkin.latitude, longitude: checkin.longitude)
             
             let annotation = MKPointAnnotation()

@@ -17,7 +17,7 @@ extension OTMClient{
     
     struct ParseConstants{
         static let LocationsUrl = "https://api.parse.com/1/classes/StudentLocation";
-        static let LocationsLimitCount = "?limit=100"
+        static let LocationsLimitCount = "?limit=100&order=-updateAt"
         
         static let ApplicationId = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
         static let ClientKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"

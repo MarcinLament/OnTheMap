@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var emailAddress: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var loginButton: UIButton!
@@ -23,16 +24,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if emailAddress.text!.isEmpty || password.text!.isEmpty{
             loginButton.userInteractionEnabled = false
         }
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.handleSingleTap(_:)))
+        self.view.addGestureRecognizer(gesture)
+        
+        emailAddress.delegate = self
+        password.delegate = self
     }
     
     @IBAction func loginUser(sender: AnyObject) {
-
+        activityIndicator.startAnimating()
         OTMClient.sharedInstance().login(emailAddress.text!, password: password.text!) { (success, errorString) in
             performUIUpdatesOnMain {
+                self.activityIndicator.stopAnimating()
                 if (success) {
                     self.completeLogin()
                 } else {
-                    self.displayError(errorString)
+                    self.showAlert("Error", message: errorString!, completion: nil)
                 }
             }
         }
@@ -59,6 +67,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginButton.userInteractionEnabled = !(emailAddress.text!.isEmpty || password.text!.isEmpty)
         return true
     }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func handleSingleTap(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
 }
 
 extension LoginViewController {
@@ -72,10 +89,6 @@ extension LoginViewController {
         } else {
             loginButton.alpha = 0.5
         }
-    }
-    
-    private func displayError(errorString: String?) {
-        showAlert("Error", message: errorString!, completion: nil)
     }
     
     private func styleTextField(textField: UITextField){

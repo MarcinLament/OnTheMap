@@ -42,15 +42,17 @@ class FindLocationViewController: UIViewController, EnterLocationDelegate, Enter
             performUIUpdatesOnMain {
                 if (success != nil) {
                     self.dismissViewControllerAnimated(true, completion: nil)
+                }else{
+                    self.showAlert("Error", message: error!, completion: nil)
                 }
             }
         }
     }
     
-    func findOnMapViewControllerDidEnterLocation(childViewController: FindOnMapViewController, queryText: String) {
+    func findOnMapViewControllerDidEnterLocation(childViewController: FindOnMapViewController, queryText: String, placemark: MKPlacemark) {
         findOnMapContainer.hidden = true;
         addLinkContainer.hidden = false;
-        submitLinkViewController?.findOnMap(queryText)
+        submitLinkViewController?.updateMapLayout(placemark)
         self.locationString = queryText
     }
     

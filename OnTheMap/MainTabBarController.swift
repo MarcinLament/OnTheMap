@@ -39,6 +39,8 @@ class MainTabBarController: UITabBarController{
                     }else{
                         (self.selectedViewController as! ListViewController).refresh()
                     }
+                }else{
+                    self.showAlert("Error", message: error!, completion: nil)
                 }
             }
         }

@@ -14,7 +14,6 @@ class OTMClient : NSObject {
     
     var userId: String? = nil
     var user: NSDictionary? = nil
-    var userCheckins = [UserCheckin]()
     
     func taskForGETMethod(){
         

@@ -8,16 +8,18 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 class FindOnMapViewController: UIViewController, UITextFieldDelegate{
-
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var findOnMapButton: UIButton!
     @IBOutlet weak var locationTextView: UITextField!
     
     var delegate:EnterLocationDelegate?
     
     @IBAction func findonMapAction(sender: AnyObject) {
-        self.delegate?.findOnMapViewControllerDidEnterLocation(self, queryText: locationTextView.text!)
+        findOnMap(locationTextView.text!)
     }
     
     override func viewDidLoad() {
@@ -29,7 +31,32 @@ class FindOnMapViewController: UIViewController, UITextFieldDelegate{
         if locationTextView.text!.isEmpty{
             findOnMapButton.userInteractionEnabled = false
         }
-
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(FindOnMapViewController.handleSingleTap(_:)))
+        self.view.addGestureRecognizer(gesture)
+        
+        locationTextView.delegate = self
+    }
+    
+    func findOnMap(locationString: String){
+        activityIndicator.startAnimating()
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = locationString
+        let search = MKLocalSearch(request: request)
+        search.startWithCompletionHandler { response, _ in
+            guard let response = response else {
+                self.showAlert("Error", message: "Problem getting locations. Please try again.", completion: nil)
+                return
+            }
+            
+            if(response.mapItems.count > 0){
+                let placemark = response.mapItems[0].placemark;
+                self.activityIndicator.stopAnimating()
+                self.delegate?.findOnMapViewControllerDidEnterLocation(self, queryText: locationString, placemark: placemark)
+            }else{
+                self.showAlert("Error", message: "No locations found. Please try again.", completion: nil)
+            }
+        }
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
@@ -37,8 +64,17 @@ class FindOnMapViewController: UIViewController, UITextFieldDelegate{
         findOnMapButton.userInteractionEnabled = !text.isEmpty
         return true
     }
+    
+    func handleSingleTap(recognizer: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 
 protocol EnterLocationDelegate {
-    func findOnMapViewControllerDidEnterLocation(childViewController:FindOnMapViewController, queryText: String)
+    func findOnMapViewControllerDidEnterLocation(childViewController:FindOnMapViewController, queryText: String, placemark: MKPlacemark)
 }

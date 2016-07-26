@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -50,22 +50,28 @@
                                     <action selector="loginUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="skO-bG-QDr"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="tFL-ee-NWt">
+                                <rect key="frame" x="290" y="350" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YgL-dR-506" firstAttribute="top" secondItem="cee-SS-Ydz" secondAttribute="bottom" constant="8" id="5pE-vZ-RLs"/>
                             <constraint firstItem="Kga-FH-uIf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ibi-E8-Mkw"/>
                             <constraint firstItem="6o3-ZJ-1Y6" firstAttribute="top" secondItem="YgL-dR-506" secondAttribute="bottom" constant="16" id="JJG-9p-L6T"/>
+                            <constraint firstItem="tFL-ee-NWt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lby-jn-d0v"/>
                             <constraint firstItem="YgL-dR-506" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="NRG-2c-Ubn"/>
                             <constraint firstItem="ZZN-wV-vLG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="R1b-fb-6E8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="YgL-dR-506" secondAttribute="trailing" constant="10" id="hdc-lF-ghK"/>
                             <constraint firstItem="6o3-ZJ-1Y6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jYH-fm-NKH"/>
                             <constraint firstItem="cee-SS-Ydz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="jvk-7T-mLM"/>
+                            <constraint firstItem="tFL-ee-NWt" firstAttribute="top" secondItem="6o3-ZJ-1Y6" secondAttribute="bottom" constant="8" id="nIL-DO-b6i"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cee-SS-Ydz" secondAttribute="trailing" constant="10" id="oxG-NV-FtZ"/>
                             <constraint firstItem="cee-SS-Ydz" firstAttribute="top" secondItem="Kga-FH-uIf" secondAttribute="bottom" constant="32" id="rtX-WU-vDH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="tFL-ee-NWt" id="MQE-Ks-YAG"/>
                         <outlet property="emailAddress" destination="cee-SS-Ydz" id="uxU-qe-Qsu"/>
                         <outlet property="loginButton" destination="6o3-ZJ-1Y6" id="2PP-dI-Glo"/>
                         <outlet property="password" destination="YgL-dR-506" id="BZE-Nv-8pT"/>
@@ -521,11 +527,16 @@
                                             <action selector="findonMapAction:" destination="gsF-cS-sES" eventType="touchUpInside" id="4w9-Ro-3jI"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="hSV-FB-h3G">
+                                        <rect key="frame" x="290" y="8" width="20" height="20"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14117647059999999" green="0.45098039220000002" blue="0.84705882349999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="kBi-pc-gkN" firstAttribute="centerY" secondItem="9V8-aW-dzw" secondAttribute="centerY" id="9Ka-rP-Q0T"/>
+                                    <constraint firstItem="hSV-FB-h3G" firstAttribute="centerX" secondItem="9V8-aW-dzw" secondAttribute="centerX" id="GIg-tM-B1K"/>
                                     <constraint firstItem="kBi-pc-gkN" firstAttribute="centerX" secondItem="9V8-aW-dzw" secondAttribute="centerX" id="XZy-iD-a8i"/>
+                                    <constraint firstItem="hSV-FB-h3G" firstAttribute="top" secondItem="9V8-aW-dzw" secondAttribute="top" constant="8" id="aQK-wA-Atk"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -547,6 +558,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="hSV-FB-h3G" id="kuR-4h-Nyw"/>
                         <outlet property="findOnMapButton" destination="kBi-pc-gkN" id="Cox-wP-1Wz"/>
                         <outlet property="locationTextView" destination="pW9-bu-Mrb" id="MpW-Io-QD0"/>
                     </connections>

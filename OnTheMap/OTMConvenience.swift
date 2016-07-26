@@ -39,12 +39,12 @@ extension OTMClient{
         taskForPOSTMethod(UdacityConstants.SessionUrl, httpMethod: httpMethod, httpBody: httpBody, headers: headers, subsetResponseData: true) { (result, error) in
             
             if let error = error {
-                completionHandlerForLogin(success: false, userId: nil, errorString: "Login Failed")
+                completionHandlerForLogin(success: false, userId: nil, errorString: error.localizedDescription)
             } else {
                 if let userId = (result[ResponseKeys.Account] as! NSDictionary)[ResponseKeys.Key]{
                     completionHandlerForLogin(success: true, userId: userId as? String, errorString: nil)
                 } else {
-                    completionHandlerForLogin(success: false, userId: nil, errorString: "Login Failed")
+                    completionHandlerForLogin(success: false, userId: nil, errorString: "Failed to login")
                 }
             }
         }
@@ -57,7 +57,7 @@ extension OTMClient{
         taskForPOSTMethod(url, httpMethod: nil, httpBody: nil, headers: nil, subsetResponseData: true) { (result, error) in
             
             if (error != nil) {
-                completionHandlerForGetUserDetails(success: false, user: nil, errorString: "Getting User Details Failed")
+                completionHandlerForGetUserDetails(success: false, user: nil, errorString: error?.localizedDescription)
             } else {
                 
                 if let obj = result![ResponseKeys.User] {
@@ -80,12 +80,12 @@ extension OTMClient{
         taskForPOSTMethod(url, httpMethod: nil, httpBody: nil, headers: headers, subsetResponseData: false) { (result, error) in
             
             if (error != nil) {
-                completionHandlerForGetCheckins(userCheckins: nil, errorString: "Failed while getting first 100 checkins")
+                completionHandlerForGetCheckins(userCheckins: nil, errorString: error?.localizedDescription)
             } else {
                 
                 if let results = result[ResponseKeys.Results] as? [[String:AnyObject]] {
-                    self.userCheckins = UserCheckin.userCheckinsFromResults(results)
-                    completionHandlerForGetCheckins(userCheckins: self.userCheckins, errorString: nil)
+                    UserCheckinsStorage.instance.userCheckins = UserCheckin.userCheckinsFromResults(results)
+                    completionHandlerForGetCheckins(userCheckins: UserCheckinsStorage.instance.userCheckins, errorString: nil)
                 } else {
                     completionHandlerForGetCheckins(userCheckins: nil, errorString: "Cannot parse list of checkins")
                 }
@@ -115,7 +115,7 @@ extension OTMClient{
         taskForPOSTMethod(ParseConstants.LocationsUrl, httpMethod: httpMethod, httpBody: jsonString, headers: headers, subsetResponseData: false) { (result, error) in
             
             if let error = error {
-                completionHandlerForPostingUserLocation(userCheckin: nil, errorString: "Could not parse Posting User Location response")
+                completionHandlerForPostingUserLocation(userCheckin: nil, errorString: error.localizedDescription)
             } else {
                 let userPost = UserPost.userPostFromResult((result as? [String:AnyObject])!)
                     
@@ -128,7 +128,7 @@ extension OTMClient{
                                                 mediaURL: mediaUrl,
                                                 isUsersPost: true)
                         
-                    self.userCheckins.insert(userCheckin, atIndex: 0)
+                    UserCheckinsStorage.instance.userCheckins.insert(userCheckin, atIndex: 0)
                         
                     completionHandlerForPostingUserLocation(userCheckin: userCheckin, errorString: nil)
                 }else{
