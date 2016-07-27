@@ -37,23 +37,31 @@ class OTMClient : NSObject {
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
-            func sendError(error: String) {
+            func sendError(error: String, statusCode: Int) {
                 let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandlerForPOST(result: nil, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+                completionHandlerForPOST(result: nil, error: NSError(domain: "taskForPOSTMethod", code: statusCode, userInfo: userInfo))
             }
-            
+        
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error)")
+                if(error?.code == -1009){
+                    sendError("Connection problem. Please try again", statusCode: 1)
+                }else{
+                    sendError("There was an error with your request: \(error)", statusCode: 1)
+                }
                 return
             }
             
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx!")
+            let statusCode = (response as? NSHTTPURLResponse)?.statusCode
+            if(statusCode >= 300 && statusCode <= 499){
+                sendError("Server error. Please try again later", statusCode: statusCode!)
+                return
+            }else if(statusCode < 200 && statusCode > 299){
+                sendError("Problem contacting server. Please try again later.", statusCode: statusCode!)
                 return
             }
             
             guard let data = data else {
-                sendError("No data was returned by the request!")
+                sendError("No data was returned by the request!", statusCode: 1)
                 return
             }
             

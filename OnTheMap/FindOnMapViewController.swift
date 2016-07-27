@@ -44,6 +44,9 @@ class FindOnMapViewController: UIViewController, UITextFieldDelegate{
         request.naturalLanguageQuery = locationString
         let search = MKLocalSearch(request: request)
         search.startWithCompletionHandler { response, _ in
+            
+            self.activityIndicator.stopAnimating()
+            
             guard let response = response else {
                 self.showAlert("Error", message: "Problem getting locations. Please try again.", completion: nil)
                 return
@@ -51,7 +54,6 @@ class FindOnMapViewController: UIViewController, UITextFieldDelegate{
             
             if(response.mapItems.count > 0){
                 let placemark = response.mapItems[0].placemark;
-                self.activityIndicator.stopAnimating()
                 self.delegate?.findOnMapViewControllerDidEnterLocation(self, queryText: locationString, placemark: placemark)
             }else{
                 self.showAlert("Error", message: "No locations found. Please try again.", completion: nil)

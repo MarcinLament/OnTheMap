@@ -39,7 +39,11 @@ extension OTMClient{
         taskForPOSTMethod(UdacityConstants.SessionUrl, httpMethod: httpMethod, httpBody: httpBody, headers: headers, subsetResponseData: true) { (result, error) in
             
             if let error = error {
-                completionHandlerForLogin(success: false, userId: nil, errorString: error.localizedDescription)
+                if(error.code > 1){
+                    completionHandlerForLogin(success: false, userId: nil, errorString: "Invalid credentials")
+                }else{
+                    completionHandlerForLogin(success: false, userId: nil, errorString: error.localizedDescription)
+                }
             } else {
                 if let userId = (result[ResponseKeys.Account] as! NSDictionary)[ResponseKeys.Key]{
                     completionHandlerForLogin(success: true, userId: userId as? String, errorString: nil)
